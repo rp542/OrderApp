@@ -10,7 +10,7 @@ import com.capgemini.order.exceptions.OrdersNotFoundException;
 public interface OrderService {
 	public Order addOrder(Order order) throws OrderAllReadyPresentException;
 
-	public void cancelOrder(Order order);
+	public void cancelOrder(Order order) throws OrderNotFoundException;
 
 	public Order getOrderById(int orderId) throws OrderAllReadyPresentException, OrderNotFoundException;
 

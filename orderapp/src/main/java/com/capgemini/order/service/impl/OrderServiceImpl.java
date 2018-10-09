@@ -55,9 +55,12 @@ public class OrderServiceImpl implements OrderService{
 		return order1;
 	}
 	@Override
-	public void cancelOrder(Order order) {
-	
-		orderRepository.delete(order);
+	public void cancelOrder(Order order) throws OrderNotFoundException {
+		Optional<Order> order1 = orderRepository.findById(order.getOrderId());
+		if (order1.isPresent()) {
+			orderRepository.delete(order);
+			return;
+		}
+		throw new OrderNotFoundException("Order id " + order.getOrderId() + " does not exist");
 	}
-
 }
