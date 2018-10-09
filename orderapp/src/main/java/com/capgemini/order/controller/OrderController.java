@@ -53,11 +53,13 @@ public class OrderController {
 		Order order1 = (Order) orderService.getOrdersById(orderId);
 		return new ResponseEntity<List<Order>>((List<Order>) order1, HttpStatus.OK);
 	}
+
 	@DeleteMapping("/order/{orderId}")
-	public ResponseEntity<Order> deleteOrderById(@PathVariable int orderId) throws OrderAllReadyPresentException, OrderNotFoundException {
-		
+	public ResponseEntity<Order> deleteOrderById(@PathVariable int orderId)
+			throws OrderAllReadyPresentException, OrderNotFoundException {
+
 		Order order = orderService.getOrderById(orderId);
-		System.out.println(order);
+
 		orderService.cancelOrder(order);
 		return new ResponseEntity<Order>(HttpStatus.OK);
 	}
